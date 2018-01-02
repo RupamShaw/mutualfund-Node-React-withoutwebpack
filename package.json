@@ -1,0 +1,16 @@
+{
+  "name": "mutualfund-node-react-wowebpaack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rupam <rupam.shaw@gmail.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  }
+}

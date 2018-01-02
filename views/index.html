@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to Glitch!</title>
+        <meta name="description" content="A cool thing made with Glitch">
+            <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/style.css">
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="https://unpkg.com/react@15/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel" >
+        class Ninjas extends React.Component {
+            
+            constructor(props) {
+                super(props);
+                this.state = {ninjas: []};
+            }
+            
+            componentWillMount() {
+                var nin = this.state.ninjas;
+                fetch("http://localhost:3000/MF")
+                .then(d => {
+                    return d.json();
+                })
+                .then(r =>{
+                    console.log(r)
+                    this.setState({ninjas:JSON.stringify(r)});  
+                }) 
+            }
+
+            render() {
+                console.log('in render')
+                console.log(this.state.ninjas)
+                if(this.state.ninjas.length==0) 
+                    return(<p>loading..</p>)
+                else{
+                    var obj = JSON.parse(this.state.ninjas)
+                    console.log(obj[0].date)
+                    var dateofNav = new Date(obj[0].date)
+                    console.log(dateofNav)
+                    const divs = obj.map(item => <div key={item.code}  >{item.name} <strong> nav {item.nav}</strong></div>)
+                    return <div><h1>Date {""+dateofNav}</h1>{divs}</div> 
+                }
+            }
+        }
+        ReactDOM.render(<Ninjas />, document.getElementById('root'));
+        </script>
+    </body>
+</html>
+      
